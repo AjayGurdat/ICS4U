@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class StudentInfo {
@@ -15,7 +16,7 @@ public class StudentInfo {
 		System.out.println("1.  Enter a new student");
 		System.out.println("2.  Print a student's info (Only use if a sutudent is in the system)");
 		System.out.println("3.  Print all student's info");
-		System.out.println("4.  Option 4");
+		System.out.println("4.  Sort student info list");
 		System.out.println("5.  Option 5");
 		System.out.println("6.  Option 6");
 		System.out.println("7.  Option 7");
@@ -36,8 +37,7 @@ public class StudentInfo {
 			printAllStudents();
 			break;
 		case 4:
-			System.out.println("Not available yet");
-			System.out.println("");
+			Collections.sort(studRec);
 			break;
 		case 5:
 			System.out.println("Not available yet");

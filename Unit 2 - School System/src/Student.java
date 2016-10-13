@@ -89,9 +89,9 @@ public class Student implements Comparable {
 		this.studentNumber = studentNumber;
 	}
 
-	@Override
-	public int compareTo(Object o) {
-		if(this.getLastName())
-		return 0;
+	public boolean equals(Student s){
+		if (this.getStudentNumber() == s.getStudentNumber());
+			return true;
+			
 	}
 }
