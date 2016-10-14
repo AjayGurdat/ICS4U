@@ -38,6 +38,7 @@ public class StudentInfo {
 			break;
 		case 4:
 			Collections.sort(studRec);
+			System.out.println("Sorted!");
 			break;
 		case 5:
 			System.out.println("Not available yet");
@@ -113,7 +114,7 @@ public class StudentInfo {
 	
 	public static void printAStudent() throws InvalidInputException{
 		
-		System.out.print("Which student whould you like to print? (Student Number)");
+		System.out.print("Which student whould you like to print? (Student Number) ");
 		Scanner scan = new Scanner(System.in);
 		int lookingStudNum = scan.nextInt();
 		
