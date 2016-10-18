@@ -2,6 +2,7 @@ public class Student implements Comparable {
 	
 	private String firstName, lastName, streetName, city, province, postalCode, phoneNumber, birthdate;
 	private long studentNumber;
+	private String errorMsg = "Wrong Format! Please relaunch the program";
 
 	public String getFirstName() {
 		return firstName;
@@ -49,7 +50,7 @@ public class Student implements Comparable {
 		return postalCode;
 	}
 	else;
-		throw new InvalidInputException("Wrong format!");
+		throw new InvalidInputException(errorMsg);
 	}
 
 	public void setPostalCode(String postalCode) {
@@ -62,7 +63,7 @@ public class Student implements Comparable {
 		return phoneNumber;
 	}
 	else;
-		throw new InvalidInputException("Wrong format!");
+		throw new InvalidInputException(errorMsg);
 	}
 
 	public void setPhoneNumber(String phoneNumber) {
@@ -75,7 +76,7 @@ public class Student implements Comparable {
 		return birthdate;
 	}
 		else;
-			throw new InvalidInputException("Wrong format!");
+			throw new InvalidInputException(errorMsg);
 	}
 	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
@@ -96,7 +97,7 @@ public class Student implements Comparable {
 
 	@Override
 	public int compareTo(Object o) {
-		if (this.getStudentNumber() > this.getStudentNumber());
+		
 		return 0;
 		
 	}

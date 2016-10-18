@@ -1,16 +1,42 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+
 
 public class StudentInfo {
 	public static String scan;
 	public static int i = 0;
 	public static ArrayList<Student> studRec = new ArrayList<Student>();
 	private static long idGenerator = 300000000;
+	public static File f = new File("student.txt");
 
+	
 	public static void main(String[] args) throws InvalidInputException {
-	String run = ("true");
-	do{
+		
+		if (f.exists()) {
+			return;
+		} else
+			try {
+				f.createNewFile();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
+
+		try {
+			BufferedReader fbr = new BufferedReader (new FileReader ("student.txt"));
+		} catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		String run = ("true");
 		System.out.println("Choose an option");
 		System.out.println("");
 		System.out.println("1.  Enter a new student");
@@ -25,7 +51,7 @@ public class StudentInfo {
 		System.out.println("10. Quit");
 		Scanner option = new Scanner(System.in);
 		int optionInput = option.nextInt();
-			
+
 		switch (optionInput){
 		case 1:
 			addStudent();
@@ -65,59 +91,77 @@ public class StudentInfo {
 			System.out.println("Thank you for using my program!");
 			return;
 		}
-	}while (run == "true");
-}
-	
-	public static void addStudent() throws InvalidInputException{
-	studRec.add(new Student());
-	Scanner scan = new Scanner(System.in);
-
-	idGenerator++;
-	studRec.get(studRec.size()-1).setStudentNumber(idGenerator);
-	
-	System.out.print("Enter the student's first name: ");
-	studRec.get(studRec.size()-1).setFirstName(scan.nextLine());
-	
-	System.out.print("Enter the student's last name: ");
-	studRec.get(studRec.size()-1).setLastName(scan.nextLine());
-	
-	System.out.print("Enter the student's street name: ");
-	studRec.get(studRec.size()-1).setStreetName(scan.nextLine());
-	
-	System.out.print("Enterthe student's city: ");
-	studRec.get(studRec.size()-1).setCity(scan.nextLine());
-	
-	System.out.print("Enter the student's province: ");
-	studRec.get(studRec.size()-1).setProvince(scan.nextLine());
-	
-	System.out.print("Enter the student's postal code: (EX: x#x x#x)");
-	studRec.get(studRec.size()-1).setPostalCode(scan.nextLine());
-
-	System.out.print("Enter the student's phone number: (EX: ### ### ####)");
-	studRec.get(studRec.size()-1).setPhoneNumber(scan.nextLine());
-	
-	System.out.print("Enter the student's birthdate: (EX: dd/mm/yyyy)");
-	studRec.get(studRec.size()-1).setBirthdate(scan.nextLine());
-	
-	System.out.println("What you have entered:");
-	System.out.println(studRec.get(studRec.size()-1).getFirstName());
-	System.out.println(studRec.get(studRec.size()-1).getLastName());
-	System.out.println(studRec.get(studRec.size()-1).getStreetName());
-	System.out.println(studRec.get(studRec.size()-1).getCity());
-	System.out.println(studRec.get(studRec.size()-1).getProvince());
-	System.out.println(studRec.get(studRec.size()-1).getPostalCode());
-	System.out.println(studRec.get(studRec.size()-1).getPhoneNumber());
-	System.out.println(studRec.get(studRec.size()-1).getBirthdate());
-	System.out.println("");
-	
 	}
-	
+
+	public static void addStudent() throws InvalidInputException{
+		PrintStream fos;
+		FileOutputStream fileOutputStream;
+		try {
+			fileOutputStream = new FileOutputStream(f);
+			fos = new PrintStream(fileOutputStream);
+
+
+			studRec.add(new Student());
+			Scanner scan = new Scanner(System.in);
+
+			idGenerator++;
+			studRec.get(studRec.size()-1).setStudentNumber(idGenerator);
+
+			System.out.print("Enter the student's first name: ");
+			studRec.get(studRec.size()-1).setFirstName(scan.nextLine());
+
+			System.out.print("Enter the student's last name: ");
+			studRec.get(studRec.size()-1).setLastName(scan.nextLine());
+
+			System.out.print("Enter the student's street name: ");
+			studRec.get(studRec.size()-1).setStreetName(scan.nextLine());
+
+			System.out.print("Enter the student's city: ");
+			studRec.get(studRec.size()-1).setCity(scan.nextLine());
+
+			System.out.print("Enter the student's province: ");
+			studRec.get(studRec.size()-1).setProvince(scan.nextLine());
+
+			System.out.print("Enter the student's postal code: (EX: x#x x#x)");
+			studRec.get(studRec.size()-1).setPostalCode(scan.nextLine());
+
+			System.out.print("Enter the student's phone number: (EX: ### ### ####)");
+			studRec.get(studRec.size()-1).setPhoneNumber(scan.nextLine());
+
+			System.out.print("Enter the student's birthdate: (EX: dd/mm/yyyy)");
+			studRec.get(studRec.size()-1).setBirthdate(scan.nextLine());
+
+			System.out.println("What you have entered:");
+			System.out.println(studRec.get(studRec.size()-1).getFirstName());
+			System.out.println(studRec.get(studRec.size()-1).getLastName());
+			System.out.println(studRec.get(studRec.size()-1).getStreetName());
+			System.out.println(studRec.get(studRec.size()-1).getCity());
+			System.out.println(studRec.get(studRec.size()-1).getProvince());
+			System.out.println(studRec.get(studRec.size()-1).getPostalCode());
+			System.out.println(studRec.get(studRec.size()-1).getPhoneNumber());
+			System.out.println(studRec.get(studRec.size()-1).getBirthdate());
+			System.out.println("");
+			fos.println(studRec.get(studRec.size()-1).getFirstName());
+			fos.println(studRec.get(studRec.size()-1).getLastName());
+			fos.println(studRec.get(studRec.size()-1).getStreetName());
+			fos.println(studRec.get(studRec.size()-1).getCity());
+			fos.println(studRec.get(studRec.size()-1).getProvince());
+			fos.println(studRec.get(studRec.size()-1).getPostalCode());
+			fos.println(studRec.get(studRec.size()-1).getPhoneNumber());
+			fos.println(studRec.get(studRec.size()-1).getBirthdate());
+
+			fileOutputStream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static void printAStudent() throws InvalidInputException{
-		
+
 		System.out.print("Which student whould you like to print? (Student Number) ");
 		Scanner scan = new Scanner(System.in);
 		int lookingStudNum = scan.nextInt();
-		
+
 		System.out.println(studRec.get(lookingStudNum - 1).getFirstName());
 		System.out.println(studRec.get(lookingStudNum - 1).getLastName());
 		System.out.println(studRec.get(lookingStudNum - 1).getStreetName());
@@ -129,7 +173,7 @@ public class StudentInfo {
 		System.out.println(studRec.get(lookingStudNum - 1).getStudentNumber());
 		System.out.println("");
 	}
-	
+
 	public static void printAllStudents() throws InvalidInputException{
 		for(i = 0; i < studRec.size(); i++) // NO ; AFTER A FOR LOOP!!!
 		{
