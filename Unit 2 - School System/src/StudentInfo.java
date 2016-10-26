@@ -106,7 +106,6 @@ public class StudentInfo {
 			}
 		}
 	}
-
 	public static void addStudent() throws InvalidInputException {
 		PrintStream fos;
 		FileOutputStream fileOutputStream;
@@ -143,7 +142,7 @@ public class StudentInfo {
 
 			System.out.print("Enter the student's birthdate: (EX: dd/mm/yyyy)");
 			studRec.get(studRec.size() - 1).setBirthdate(scan.nextLine());
-			
+
 			System.out.println("");
 			System.out.println("What you have entered:");
 			System.out.println(studRec.get(studRec.size() - 1).getFirstName());
@@ -155,17 +154,22 @@ public class StudentInfo {
 			System.out.println(studRec.get(studRec.size() - 1).getPhoneNumber());
 			System.out.println(studRec.get(studRec.size() - 1).getBirthdate());
 			System.out.println("");
-			
-			fos.println("");
-			fos.println(studRec.get(studRec.size() - 1).getFirstName());
-			fos.println(studRec.get(studRec.size() - 1).getLastName());
-			fos.println(studRec.get(studRec.size() - 1).getStreetName());
-			fos.println(studRec.get(studRec.size() - 1).getCity());
-			fos.println(studRec.get(studRec.size() - 1).getProvince());
-			fos.println(studRec.get(studRec.size() - 1).getPostalCode());
-			fos.println(studRec.get(studRec.size() - 1).getPhoneNumber());
-			fos.println(studRec.get(studRec.size() - 1).getBirthdate());
-			
+
+			for (i = 0; i < studRec.size(); i++) // NO ; AFTER A FOR OR WHILE LOOP!!!
+			{
+				fos.println("----------");
+				fos.println(studRec.get(i).getFirstName());
+				fos.println(studRec.get(i).getLastName());
+				fos.println(studRec.get(i).getStreetName());
+				fos.println(studRec.get(i).getCity());
+				fos.println(studRec.get(i).getProvince());
+				fos.println(studRec.get(i).getPostalCode());
+				fos.println(studRec.get(i).getPhoneNumber());
+				fos.println(studRec.get(i).getBirthdate());
+				fos.println(studRec.get(i).getStudentNumber());
+			}
+			fos.close();
+			fileOutputStream.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -198,7 +202,7 @@ public class StudentInfo {
 	}
 
 	public static void printAllStudents() throws InvalidInputException {
-		for (i = 0; i < studRec.size(); i++) // NO ; AFTER A FOR LOOP!!!
+		for (i = 0; i < studRec.size(); i++) // NO ; AFTER A FOR OR WHILE LOOP!!!
 		{
 			System.out.print(i + 1);
 			System.out.println(". ");
