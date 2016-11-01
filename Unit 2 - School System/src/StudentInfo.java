@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,15 +8,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+/**
+ * Main method
+ * @author 323016139
+ *
+ */
 public class StudentInfo {
 	public static String scan;
 	public static int i = 0;
 	public static ArrayList<Student> studRec = new ArrayList<Student>();
-	private static long idGenerator = 300000000;
+	private static long idGenerator = 0;
 	public static File f = new File("student.txt");
 
+	/**
+	 * Creates file "student.txt" if it does not exists
+	 * @param args
+	 * @throws InvalidInputException
+	 */
 	public static void main(String[] args) throws InvalidInputException {
-
 		if (!f.exists()) {
 			try {
 				f.createNewFile();
@@ -27,6 +35,9 @@ public class StudentInfo {
 		}
 
 		try {
+			/**
+			 * Imports info from file "student.txt"
+			 */
 			BufferedReader fbr = new BufferedReader(new FileReader("student.txt"));
 			String lineInfo = fbr.readLine();
 			while (lineInfo != null) {
@@ -47,7 +58,9 @@ public class StudentInfo {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		/**
+		 *  main menu
+		 */
 		String run = ("true");
 		while (run == "true") {
 			System.out.println("Choose an option");
@@ -64,7 +77,7 @@ public class StudentInfo {
 			System.out.println("10. Quit");
 			Scanner option = new Scanner(System.in);
 			int optionInput = option.nextInt();
-
+			
 			switch (optionInput) {
 			case 1:
 				addStudent();
@@ -106,6 +119,10 @@ public class StudentInfo {
 			}
 		}
 	}
+	/**
+	 * Gets information from user
+	 * @throws InvalidInputException
+	 */
 	public static void addStudent() throws InvalidInputException {
 		PrintStream fos;
 		FileOutputStream fileOutputStream;
@@ -154,10 +171,14 @@ public class StudentInfo {
 			System.out.println(studRec.get(studRec.size() - 1).getPhoneNumber());
 			System.out.println(studRec.get(studRec.size() - 1).getBirthdate());
 			System.out.println("");
+			
+			fos.println("DO NOT REMOVE THIS LINE");
 
-			for (i = 0; i < studRec.size(); i++) // NO ; AFTER A FOR OR WHILE LOOP!!!
+			for (i = 0; i < studRec.size(); i++)
 			{
-				fos.println("----------");
+				/**
+				 *  Updates file by printing array list onto file
+				 */
 				fos.println(studRec.get(i).getFirstName());
 				fos.println(studRec.get(i).getLastName());
 				fos.println(studRec.get(i).getStreetName());
@@ -168,19 +189,22 @@ public class StudentInfo {
 				fos.println(studRec.get(i).getBirthdate());
 				fos.println(studRec.get(i).getStudentNumber());
 			}
-			fos.close();
 			fileOutputStream.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
+/**
+ * Finds and prints a student from the array list by student number
+ * @throws InvalidInputException
+ */
 	public static void printAStudent() throws InvalidInputException {
 
 		System.out.print("Which student whould you like to print? (Student Number) ");
 		Scanner  scan = new Scanner(System.in);
 		int lookingStudNum = scan.nextInt();
-
+		lookingStudNum = lookingStudNum - 1;
+		
 		for (i = 0; i < studRec.size(); i++){
 			studRec.get(i).getStudentNumber();
 			if (i == lookingStudNum){
@@ -200,9 +224,12 @@ public class StudentInfo {
 			}
 		}
 	}
-
+/**
+ * Prints all students and their information from the array list
+ * @throws InvalidInputException
+ */
 	public static void printAllStudents() throws InvalidInputException {
-		for (i = 0; i < studRec.size(); i++) // NO ; AFTER A FOR OR WHILE LOOP!!!
+		for (i = 0; i < studRec.size() - 1; i++)
 		{
 			System.out.print(i + 1);
 			System.out.println(". ");

@@ -1,5 +1,5 @@
 public class Student implements Comparable {
-	
+
 	private String firstName, lastName, streetName, city, province, postalCode, phoneNumber, birthdate;
 	private long studentNumber;
 	private String errorMsg = "Wrong Format! Please relaunch the program";
@@ -45,12 +45,12 @@ public class Student implements Comparable {
 	}
 
 	public String getPostalCode() throws InvalidInputException {
-	int postalCodeLength = postalCode.length();
-	if (postalCodeLength == 7){
-		return postalCode;
-	}
-	else;
-		throw new InvalidInputException(errorMsg);
+		int postalCodeLength = postalCode.length();
+		if (postalCodeLength == 7){
+			return postalCode;
+		}
+		else
+			throw new InvalidInputException(errorMsg);
 	}
 
 	public void setPostalCode(String postalCode) {
@@ -58,12 +58,12 @@ public class Student implements Comparable {
 	}
 
 	public String getPhoneNumber() throws InvalidInputException {
-	int phoneNumberLenght = phoneNumber.length();
-	if (phoneNumberLenght == 12){
-		return phoneNumber;
-	}
-	else;
-		throw new InvalidInputException(errorMsg);
+		int phoneNumberLenght = phoneNumber.length();
+		if (phoneNumberLenght == 12){
+			return phoneNumber;
+		}
+		else
+			throw new InvalidInputException(errorMsg);
 	}
 
 	public void setPhoneNumber(String phoneNumber) {
@@ -71,11 +71,11 @@ public class Student implements Comparable {
 	}
 
 	public String getBirthdate() throws InvalidInputException {
-	int birthdayLenght = birthdate.length();
-	if (birthdayLenght == 10){
-		return birthdate;
-	}
-		else;
+		int birthdayLenght = birthdate.length();
+		if (birthdayLenght == 10){
+			return birthdate;
+		}
+		else
 			throw new InvalidInputException(errorMsg);
 	}
 	public void setBirthdate(String birthdate) {
@@ -92,13 +92,13 @@ public class Student implements Comparable {
 
 	public boolean equals(Student s){
 		if (this.getStudentNumber() == s.getStudentNumber());
-			return true;	
+		return true;	
 	}
 
 	@Override
 	public int compareTo(Object o) {
-		
+
 		return 0;
-		
+
 	}
 }
