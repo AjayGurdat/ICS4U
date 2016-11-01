@@ -1,3 +1,9 @@
+/*
+ * Ajay Gurdat
+ * 1/11/2016
+ * Student Information Organizer and Handler
+ * A program that takes information of students from a user, saves it and organizes them into an array list.
+ */
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;

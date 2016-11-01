@@ -1,3 +1,9 @@
+/*
+ * Ajay Gurdat
+ * 1/11/2016
+ * Student Information Organizer and Handler
+ * A program that takes information of students from a user, saves it and organizes them into an array list.
+ */
 public class Student implements Comparable {
 
 	private String firstName, lastName, streetName, city, province, postalCode, phoneNumber, birthdate;

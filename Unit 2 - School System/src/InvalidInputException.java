@@ -1,4 +1,9 @@
-
+/*
+ * Ajay Gurdat
+ * 1/11/2016
+ * Student Information Organizer and Handler
+ * A program that takes information of students from a user, saves it and organizes them into an array list.
+ */
 public class InvalidInputException extends Exception {
 
 	public InvalidInputException() {
