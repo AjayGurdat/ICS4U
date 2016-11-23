@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -149,16 +150,52 @@ public class Sort {
 		System.out.println("What method would you like to sort the array?");
 		System.out.println("1. Selection");
 		System.out.println("2. Insertion");
+		System.out.println("3. Merge");
 		scan = new Scanner(System.in);
 		int prefMethod = scan.nextInt();
 		if (prefMethod == 1) {
 			selectionSort(intNumbers);
 		} else if (prefMethod == 2) {
 			insertionSort(intNumbers);
+		} else if (prefMethod == 3) {
+			mergeSort(intNumbers);
 		}
+	}
+
+	private static int[] mergeSort(int[] intNumbers) {
+		if (intNumbers.length == 1){
+			return intNumbers;
+		}
+		int[] leftSide = Arrays.copyOfRange(intNumbers, 0, intNumbers.length/2);
+		int[] rightSide = Arrays.copyOfRange(intNumbers,  intNumbers.length/2, intNumbers.length);
+
+		mergeSort(leftSide);
+		mergeSort(rightSide);
+		int[] sortedArray = merge(leftSide, rightSide);
+		return sortedArray;
 
 	}
 
+	private static int[] merge(int[] leftSide, int[] rightSide) {
+		int[] sortedArray = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		int l = 0;
+		int r = 0;
+		System.out.println(leftSide[l]);
+		for (int i = 0; l < leftSide.length - 1 || r < rightSide.length - 1; i++){
+			if (leftSide[l] < rightSide[r]) {
+				sortedArray[i] = leftSide[l];
+				l = l + 1;
+			} else if (leftSide[l] > rightSide[r]){
+				sortedArray[i] = rightSide[r];
+				r = r + 1;
+			} else {
+				leftSide[l] = sortedArray[i];
+				l = l + 1;
+			}
+		}
+		return sortedArray;
+
+	}
 	/**
 	 * @param intNumbers
 	 * This method does selection sorting to sort the array of integers

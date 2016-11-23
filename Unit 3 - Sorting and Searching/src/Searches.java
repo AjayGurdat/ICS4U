@@ -84,8 +84,7 @@ public class Searches {
 	 */
 	static void searchInt(int[] intNumbers) {
 		int startIndex = 0;
-		int endIndex = intNumbers.length;
-		int midIndex = (startIndex + endIndex) / 2;
+		int endIndex = intNumbers.length - 1;
 		System.out.println("How would you like to find your target?");
 		System.out.println("1. Linear Search");
 		System.out.println("2. Binary Search");
@@ -100,13 +99,13 @@ public class Searches {
 			foundIndex = linearSearch(intNumbers, target);
 			break;
 		case 2:
-			foundIndex = binarySearch(startIndex, endIndex, midIndex, target, intNumbers);
+			foundIndex = binarySearch(startIndex, endIndex, target, intNumbers);
 			break;
 		}
 		if (foundIndex >= 0) {
 			System.out.print("Your target was found at spot " + foundIndex + " in the array.");
 		} else {
-			System.out.print("Your target was not found the in the array.");
+			System.out.print("Your target was not found the in the array." + foundIndex);
 		}
 	}
 
@@ -117,20 +116,22 @@ public class Searches {
 	 * @param target
 	 * @return This method does binary searching to find the target number in the array
 	 */
-	private static int binarySearch(int startIndex, int endIndex, int midIndex, int target, int[] intNumbers) {
+	private static int binarySearch(int startIndex, int endIndex, int target, int[] intNumbers) {
+		
+		int midIndex = (startIndex + endIndex) / 2;
 
 		if (startIndex > endIndex) {
-			return -1; // Returns -1 is target is not found
+			return -2; // Returns -1 is target is not found
 		}
 
 		if (intNumbers[midIndex] == target) {
 			return midIndex; // Returns when target index is found
 
 		} else if (intNumbers[midIndex] > target) {
-			return binarySearch(startIndex, midIndex - 1, ((startIndex + (midIndex - 1)) / 2), target, intNumbers); // Calls back method with new variables
+			return binarySearch(startIndex, midIndex - 1, target, intNumbers); // Calls back method with new variables
 
 		} else if (intNumbers[midIndex] < target) {
-			return binarySearch(midIndex + 1, endIndex, (((midIndex + 1) + endIndex) / 2), target, intNumbers); // Calls back method with new variables
+			return binarySearch(midIndex + 1, endIndex, target, intNumbers); // Calls back method with new variables
 		}
 		return -1; // Returns -1 is target is not found
 

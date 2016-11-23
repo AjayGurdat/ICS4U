@@ -9,7 +9,7 @@ public class Main {
 	public static void main(String[] args) {
 		String[] words = { "Apple", "Case", "Pen", "Clock", "Mouse", "Bird", "Light", "Food", "Foot", "Cat", "Movie", "School" };
 		double[] doubleNumbers = { 7.4, 3.1, 22.6, 1.5, 6.1, 8.7, 4.2, 0, 5.4, 10.1, 9.8 };
-		int[] intNumbers = { 7, 3, 2, 1, 6, 8, 4, 0, 5, 10, 9, 12, 11 };
+		int[] intNumbers = {5, 6, 3, 8, 2, 1, 0, 22, 45, 21, 42, 12, 15, 67, 55, 78};
 		System.out.println("What do you want to do?");
 		System.out.println("1. Sort the list");
 		System.out.println("2. Search the list");
