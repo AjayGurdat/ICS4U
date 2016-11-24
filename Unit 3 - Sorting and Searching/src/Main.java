@@ -1,15 +1,22 @@
 import java.util.Scanner;
 
+/**
+ * @author 323016139
+ * Ajay Gurdat
+ * 010/11/2016 - 22/11/2016 Main
+ */
 public class Main {
 	private static Scanner scan;
 
 	/**
 	 * @param args
+	 *            Main method with arrays that send the arrays to other methods
 	 */
 	public static void main(String[] args) {
-		String[] words = { "Apple", "Case", "Pen", "Clock", "Mouse", "Bird", "Light", "Food", "Foot", "Cat", "Movie", "School" };
+		String[] words = { "Apple", "Case", "Pen", "Clock", "Mouse", "Bird", "Light", "Food", "Foot", "Cat", "Movie",
+				"School" };
 		double[] doubleNumbers = { 7.4, 3.1, 22.6, 1.5, 6.1, 8.7, 4.2, 0, 5.4, 10.1, 9.8 };
-		int[] intNumbers = {5, 6, 3, 8, 2, 1, 0, 22, 45, 21, 42, 12, 15, 67, 55, 78};
+		int[] intNumbers = { 7, 3, 2, 1, 14, 6, 8, 4, 0, 5, 10, 9, 12 };
 		System.out.println("What do you want to do?");
 		System.out.println("1. Sort the list");
 		System.out.println("2. Search the list");
@@ -56,22 +63,3 @@ public class Main {
 
 	}
 }
-
-// public static void insertionSort(int[] intNumbers){
-// for (int a = 0; a < intNumbers.length - 1; a++){
-// for (int i = 0; i < intNumbers.length - 1; i++){
-// if (intNumbers[i] > intNumbers [i +1]){
-// int temp = intNumbers[i];
-// intNumbers[i] = intNumbers[i + 1];
-// intNumbers[i + 1] = temp;
-// for (int x = 0; x < intNumbers.length; x++){
-// System.out.print(intNumbers[x] + " ");
-// if (x == intNumbers.length - 1){
-// System.out.println(" ");
-// }
-// }
-// }
-//
-// }
-// }
-// }

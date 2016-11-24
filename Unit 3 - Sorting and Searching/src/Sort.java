@@ -2,32 +2,67 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * @author 323016139
- *
+ * @author 323016139, Ajay Gurdat, 09/11/2016 - 22/11/2016, Sorting
  */
 public class Sort {
 
 	private static Scanner scan;
 
 	/**
+	 * This method takes the array of strings from the main and allows the user
+	 * to alter it
+	 * 
 	 * @param words
-	 * This method takes the array of strings from the main and allows the user to alter it
 	 */
 	static void sortString(String[] words) {
 		System.out.println("What method would you like to sort the array?");
 		System.out.println("1. Selection");
 		System.out.println("2. Insertion");
+		System.out.println("3. Bubble");
+		System.out.println("4. Merge");
 		scan = new Scanner(System.in);
 		int prefMethod = scan.nextInt();
 		if (prefMethod == 1) {
 			selectionSort(words);
 		} else if (prefMethod == 2) {
 			insertionSort(words);
+		} else if (prefMethod == 3) {
+			bubbleSort(words);
+		} else if (prefMethod == 4) {
+			mergeSort(words);
 		}
 	}
+
+	private static void mergeSort(String[] words) {
+		// TODO Auto-generated method stub
+
+	}
+
 	/**
+	 * This method does bubble sorting to sort the array of strings
+	 * 
 	 * @param words
+	 */
+	private static void bubbleSort(String[] words) {
+		for (int a = 0; a < words.length - 1; a++) {
+			for (int i = 0; i < words.length - 1; i++) {
+				if (words[i].compareTo(words[i + 1]) > 0) {
+					String temp = words[i];
+					words[i] = words[i + 1];
+					words[i + 1] = temp;
+				}
+			}
+			for (int x = 0; x < words.length; x++) {
+				System.out.print(words[x] + "  ");
+			}
+			System.out.println(" ");
+		}
+	}
+
+	/**
 	 * This method does insertion sorting to sort the array of strings
+	 * 
+	 * @param words
 	 */
 	private static void insertionSort(String[] words) {
 		int i;
@@ -44,14 +79,12 @@ public class Sort {
 			}
 			words[i + 1] = temp;
 		}
-		for (int x = 0; x < words.length; x++) {
-			System.out.print(words[x] + "  ");
-		}
 	}
 
 	/**
-	 * @param words
 	 * This method does selection sorting to sort the array of string
+	 * 
+	 * @param words
 	 */
 	private static void selectionSort(String[] words) {
 		for (int i = 0; i < words.length; i++) {
@@ -75,26 +108,53 @@ public class Sort {
 	}
 
 	/**
+	 * This method takes the array of doubles from the main and allows the user
+	 * to alter it
+	 * 
 	 * @param doubleNumbers
-	 * This method takes the array of doubles from the main and allows the user to alter it
 	 */
 	static void sortDouble(double[] doubleNumbers) {
 		System.out.println("What method would you like to sort the array?");
 		System.out.println("1. Selection");
 		System.out.println("2. Insertion");
+		System.out.println("3. Bubble");
 		scan = new Scanner(System.in);
 		int prefMethod = scan.nextInt();
 		if (prefMethod == 1) {
 			selectionSort(doubleNumbers);
 		} else if (prefMethod == 2) {
 			insertionSort(doubleNumbers);
+		} else if (prefMethod == 3) {
+			bubbleSort(doubleNumbers);
 		}
 
 	}
 
 	/**
+	 * This method does bubble sorting to sort the array of strings
+	 * 
 	 * @param doubleNumbers
+	 */
+	private static void bubbleSort(double[] doubleNumbers) {
+		for (int a = 0; a < doubleNumbers.length - 1; a++) {
+			for (int i = 0; i < doubleNumbers.length - 1; i++) {
+				if (doubleNumbers[i] > doubleNumbers[i + 1]) {
+					double temp = doubleNumbers[i];
+					doubleNumbers[i] = doubleNumbers[i + 1];
+					doubleNumbers[i + 1] = temp;
+				}
+			}
+			for (int x = 0; x < doubleNumbers.length; x++) {
+				System.out.print(doubleNumbers[x] + "  ");
+			}
+			System.out.println(" ");
+		}
+	}
+
+	/**
 	 * This method does insertion sorting to sort the array of doubles
+	 * 
+	 * @param doubleNumbers
 	 */
 	private static void insertionSort(double[] doubleNumbers) {
 		int i;
@@ -111,14 +171,12 @@ public class Sort {
 			}
 			doubleNumbers[i + 1] = temp;
 		}
-		for (int x = 0; x < doubleNumbers.length; x++) {
-			System.out.print(doubleNumbers[x] + "  ");
-		}
 	}
 
 	/**
-	 * @param doubleNumbers
 	 * This method does selection sorting to sort the array of doubles
+	 * 
+	 * @param doubleNumbers
 	 */
 	private static void selectionSort(double[] doubleNumbers) {
 		for (int i = 0; i < doubleNumbers.length; i++) {
@@ -143,14 +201,17 @@ public class Sort {
 	}
 
 	/**
+	 * This method takes the array of integers from the main and allows the user
+	 * to alter it
+	 * 
 	 * @param intNumbers
-	 * This method takes the array of integers from the main and allows the user to alter it
 	 */
 	public static void sortInt(int[] intNumbers) {
 		System.out.println("What method would you like to sort the array?");
 		System.out.println("1. Selection");
 		System.out.println("2. Insertion");
-		System.out.println("3. Merge");
+		System.out.println("3. Bubble");
+		System.out.println("4. Merge");
 		scan = new Scanner(System.in);
 		int prefMethod = scan.nextInt();
 		if (prefMethod == 1) {
@@ -158,47 +219,98 @@ public class Sort {
 		} else if (prefMethod == 2) {
 			insertionSort(intNumbers);
 		} else if (prefMethod == 3) {
-			mergeSort(intNumbers);
+			bubbleSort(intNumbers);
+		} else if (prefMethod == 4) {
+			int[] sortedArray = mergeSort(intNumbers);
+			for (int x = 0; x < sortedArray.length; x++) {
+				System.out.print(sortedArray[x] + "  ");
+			}
+
 		}
+
 	}
 
+	/**
+	 * This method does merge sort to sort the array of integers
+	 * 
+	 * @param intNumbers
+	 * @return
+	 */
 	private static int[] mergeSort(int[] intNumbers) {
-		if (intNumbers.length == 1){
+		if (intNumbers.length <= 1) {
 			return intNumbers;
 		}
-		int[] leftSide = Arrays.copyOfRange(intNumbers, 0, intNumbers.length/2);
-		int[] rightSide = Arrays.copyOfRange(intNumbers,  intNumbers.length/2, intNumbers.length);
+		int[] leftSide = Arrays.copyOfRange(intNumbers, 0, intNumbers.length / 2);
+		int[] rightSide = Arrays.copyOfRange(intNumbers, intNumbers.length / 2, intNumbers.length);
 
-		mergeSort(leftSide);
-		mergeSort(rightSide);
+		leftSide = mergeSort(leftSide);
+		rightSide = mergeSort(rightSide);
 		int[] sortedArray = merge(leftSide, rightSide);
 		return sortedArray;
-
 	}
 
+	/**
+	 * This method merges two sorted arrays into one big sorted array
+	 * 
+	 * @param leftSide
+	 * @param rightSide
+	 * @return
+	 */
 	private static int[] merge(int[] leftSide, int[] rightSide) {
-		int[] sortedArray = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		int l = 0;
-		int r = 0;
-		System.out.println(leftSide[l]);
-		for (int i = 0; l < leftSide.length - 1 || r < rightSide.length - 1; i++){
-			if (leftSide[l] < rightSide[r]) {
-				sortedArray[i] = leftSide[l];
-				l = l + 1;
-			} else if (leftSide[l] > rightSide[r]){
-				sortedArray[i] = rightSide[r];
-				r = r + 1;
-			} else {
-				leftSide[l] = sortedArray[i];
-				l = l + 1;
+		int[] sortedArray = new int[leftSide.length + rightSide.length];
+		int indexRight = 0;
+		int indexLeft = 0;
+		int indexSorted = 0;
+
+		while (indexLeft < leftSide.length || indexRight < rightSide.length) {
+			if (indexLeft < leftSide.length || indexRight < rightSide.length) {
+				if (leftSide[indexLeft] <= rightSide[indexRight]) {
+					sortedArray[indexSorted] = leftSide[indexLeft];
+					indexLeft++;
+					indexSorted++;
+				} else {
+					sortedArray[indexSorted] = rightSide[indexRight];
+					indexRight++;
+					indexSorted++;
+				}
+			} else if (indexLeft < leftSide.length) {
+				sortedArray[indexSorted] = leftSide[indexLeft];
+				indexLeft++;
+				indexSorted++;
+			} else if (indexRight < rightSide.length) {
+				sortedArray[indexSorted] = rightSide[indexRight];
+				indexRight++;
+				indexSorted++;
 			}
 		}
 		return sortedArray;
-
 	}
+
 	/**
+	 * This method does bubble sorting to sort the array of strings
+	 * 
 	 * @param intNumbers
+	 */
+	private static void bubbleSort(int[] intNumbers) {
+		for (int a = 0; a < intNumbers.length - 1; a++) {
+			for (int i = 0; i < intNumbers.length - 1; i++) {
+				if (intNumbers[i] > intNumbers[i + 1]) {
+					int temp = intNumbers[i];
+					intNumbers[i] = intNumbers[i + 1];
+					intNumbers[i + 1] = temp;
+				}
+			}
+			for (int x = 0; x < intNumbers.length; x++) {
+				System.out.print(intNumbers[x] + "  ");
+			}
+			System.out.println(" ");
+		}
+	}
+
+	/**
 	 * This method does selection sorting to sort the array of integers
+	 * 
+	 * @param intNumbers
 	 */
 	public static void selectionSort(int[] intNumbers) {
 		for (int i = 0; i < intNumbers.length; i++) {
@@ -223,8 +335,9 @@ public class Sort {
 	}
 
 	/**
-	 * @param intNumbers
 	 * This method does insertion sorting to sort the array of integers
+	 * 
+	 * @param intNumbers
 	 */
 	public static void insertionSort(int[] intNumbers) {
 		int i;
@@ -240,9 +353,6 @@ public class Sort {
 				}
 			}
 			intNumbers[i + 1] = temp;
-		}
-		for (int x = 0; x < intNumbers.length; x++) {
-			System.out.print(intNumbers[x] + "  ");
 		}
 	}
 }
