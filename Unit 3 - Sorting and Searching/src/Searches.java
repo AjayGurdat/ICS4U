@@ -11,6 +11,7 @@ public class Searches {
 	 * @param words
 	 */
 	static void searchString(String[] words) {
+		// declares variables based on array size
 		int startIndex = 0;
 		int endIndex = words.length - 1;
 		int midIndex = (startIndex + endIndex) / 2;
@@ -25,9 +26,12 @@ public class Searches {
 		int foundIndex = 0;
 		switch (prefMode) {
 		case 1:
+			// calls linear search
 			foundIndex = linearSearch(words, target);
 			break;
 		case 2:
+			// sorts array because binary search assumes the array is already
+			// sorted (bubble sort)
 			for (int a = 0; a < words.length - 1; a++) {
 				for (int i = 0; i < words.length - 1; i++) {
 					if (words[i].compareTo(words[i + 1]) > 0) {
@@ -37,6 +41,7 @@ public class Searches {
 					}
 				}
 			}
+			// calls binary search
 			foundIndex = binarySearch(startIndex, endIndex, midIndex, target, words);
 			break;
 		}
@@ -52,6 +57,7 @@ public class Searches {
 	 * @param doubleNumbers
 	 */
 	static void searchDouble(double[] doubleNumbers) {
+		// declares variables based on array size
 		int startIndex = 0;
 		int endIndex = doubleNumbers.length - 1;
 		int midIndex = (startIndex + endIndex) / 2;
@@ -66,9 +72,12 @@ public class Searches {
 		int foundIndex = 0;
 		switch (prefMode) {
 		case 1:
+			// calls liner search
 			foundIndex = linearSearch(doubleNumbers, target);
 			break;
 		case 2:
+			// sorts array because binary search assumes the array is already
+			// sorted (bubble sort)
 			for (int a = 0; a < doubleNumbers.length - 1; a++) {
 				for (int i = 0; i < doubleNumbers.length - 1; i++) {
 					if (doubleNumbers[i] > doubleNumbers[i + 1]) {
@@ -78,6 +87,7 @@ public class Searches {
 					}
 				}
 			}
+			// calls binary search
 			foundIndex = binarySearch(startIndex, endIndex, midIndex, target, doubleNumbers);
 			break;
 		}
@@ -94,6 +104,7 @@ public class Searches {
 	 * @param numbers
 	 */
 	static void searchInt(int[] intNumbers) {
+		// declares variables based on array size
 		int startIndex = 0;
 		int endIndex = intNumbers.length - 1;
 		int midIndex = (startIndex + endIndex) / 2;
@@ -108,9 +119,12 @@ public class Searches {
 		int foundIndex = 0;
 		switch (prefMode) {
 		case 1:
+			// calls liner search
 			foundIndex = linearSearch(intNumbers, target);
 			break;
 		case 2:
+			// sorts array because binary search assumes the array is already
+			// sorted (bubble sort)
 			for (int a = 0; a < intNumbers.length - 1; a++) {
 				for (int i = 0; i < intNumbers.length - 1; i++) {
 					if (intNumbers[i] > intNumbers[i + 1]) {
@@ -120,6 +134,7 @@ public class Searches {
 					}
 				}
 			}
+			// calls binary search
 			foundIndex = binarySearch(startIndex, endIndex, midIndex, target, intNumbers);
 			break;
 		}

@@ -370,6 +370,9 @@ public class Sort {
 			}
 			doubleNumbers[i + 1] = temp;
 		}
+		for (int x = 0; x < doubleNumbers.length; x++) {
+			System.out.print(doubleNumbers[x] + "  ");
+		}
 	}
 
 	/**
@@ -415,12 +418,16 @@ public class Sort {
 		scan = new Scanner(System.in);
 		int prefMethod = scan.nextInt();
 		if (prefMethod == 1) {
+			// calls selection sort
 			selectionSort(intNumbers);
 		} else if (prefMethod == 2) {
+			// calls insertion sort
 			insertionSort(intNumbers);
 		} else if (prefMethod == 3) {
+			// calls bubble sort
 			bubbleSort(intNumbers);
 		} else if (prefMethod == 4) {
+			// calls merge sort
 			int[] sortedArray = mergeSort(intNumbers);
 			for (int x = 0; x < sortedArray.length; x++) {
 				System.out.print(sortedArray[x] + "  ");
@@ -429,6 +436,7 @@ public class Sort {
 		} else if (prefMethod == 5) {
 			int start = 0;
 			int end = intNumbers.length - 1;
+			// calls quick sort
 			quickSort(intNumbers, start, end);
 			for (int x = 0; x < intNumbers.length; x++) {
 				System.out.print(intNumbers[x] + "  ");
@@ -438,8 +446,10 @@ public class Sort {
 	}
 
 	public static int[] quickSort(int[] intNumbers, int start, int end) {
+		// base case, returns array
 		if (start >= end)
 			return intNumbers;
+		// creates pivot at the end of current part of the array
 		int pivot = intNumbers[end];
 		int i = start, j = end;
 		while (i <= j) {
@@ -461,9 +471,13 @@ public class Sort {
 		}
 
 		if (start < j)
+			// calls back method with new variables for the next part of the
+			// array
 			quickSort(intNumbers, start, j);
 
 		if (end > i)
+			// calls back method with new variables for the next part of the
+			// array
 			quickSort(intNumbers, i, end);
 		return intNumbers;
 	}
@@ -478,12 +492,16 @@ public class Sort {
 		if (intNumbers.length <= 1) {
 			return intNumbers;
 		}
+		// breaks array into two new sub arrays and creates new array size that
+		// will be returned
 		int[] sortedArray = new int[intNumbers.length];
 		int[] leftSide = Arrays.copyOfRange(intNumbers, 0, intNumbers.length / 2);
 		int[] rightSide = Arrays.copyOfRange(intNumbers, intNumbers.length / 2, intNumbers.length);
 
+		// call back method to divide the sub array
 		leftSide = mergeSort(leftSide);
 		rightSide = mergeSort(rightSide);
+		// merges two arrays into one sorted array
 		sortedArray = merge(leftSide, rightSide);
 		return sortedArray;
 	}
@@ -503,25 +521,36 @@ public class Sort {
 
 		while (indexLeft < leftSide.length || indexRight < rightSide.length) {
 			if (indexLeft < leftSide.length && indexRight < rightSide.length) {
+				// if left < right, put left index into new sorted array
 				if (leftSide[indexLeft] <= rightSide[indexRight]) {
 					sortedArray[indexSorted] = leftSide[indexLeft];
+					// increase index of left and sorted, showing the program is
+					// done looking at those values
 					indexLeft++;
 					indexSorted++;
 				} else {
+					// when left > right, put right index into new sorted array
 					sortedArray[indexSorted] = rightSide[indexRight];
+					// increase index of right and sorted, showing the program
+					// is done looking at those values
 					indexRight++;
 					indexSorted++;
 				}
 			} else if (indexLeft < leftSide.length) {
+				// if right side has no more things in it, put the rest of left
+				// into the sorted array
 				sortedArray[indexSorted] = leftSide[indexLeft];
 				indexLeft++;
 				indexSorted++;
 			} else if (indexRight < rightSide.length) {
+				// if left side has no more things in it, put the rest of right
+				// into the sorted array
 				sortedArray[indexSorted] = rightSide[indexRight];
 				indexRight++;
 				indexSorted++;
 			}
 		}
+		// returns new sorted array
 		return sortedArray;
 	}
 
@@ -533,12 +562,15 @@ public class Sort {
 	public static void bubbleSort(int[] intNumbers) {
 		for (int a = 0; a < intNumbers.length - 1; a++) {
 			for (int i = 0; i < intNumbers.length - 1; i++) {
+				// swaps bigger number with smaller number one index higher than
+				// it
 				if (intNumbers[i] > intNumbers[i + 1]) {
 					int temp = intNumbers[i];
 					intNumbers[i] = intNumbers[i + 1];
 					intNumbers[i + 1] = temp;
 				}
 			}
+			// prints out array
 			for (int x = 0; x < intNumbers.length; x++) {
 				System.out.print(intNumbers[x] + "  ");
 			}
@@ -553,19 +585,21 @@ public class Sort {
 	 */
 	public static void selectionSort(int[] intNumbers) {
 		for (int i = 0; i < intNumbers.length; i++) {
+			// finds the smallest value in the array, saves it and its index
 			int smallestValue = intNumbers[i];
 			int smallestIndex = i;
 			for (int j = i + 1; j < intNumbers.length; j++) {
+				// swaps the smallest value with the next value of the sorted
+				// part of the array
 				if (smallestValue > intNumbers[j]) {
 					smallestValue = intNumbers[j];
 					smallestIndex = j;
 
 				}
 			}
-
 			intNumbers[smallestIndex] = intNumbers[i];
 			intNumbers[i] = smallestValue;
-
+			// prints out array
 			for (int x = 0; x < intNumbers.length; x++) {
 				System.out.print(intNumbers[x] + "  ");
 			}
@@ -580,18 +614,26 @@ public class Sort {
 	 */
 	public static void insertionSort(int[] intNumbers) {
 		int i;
+		// makes a sub array within the same array
 		for (int j = 1; j < intNumbers.length; j++) {
 			int temp = intNumbers[j];
+			// puts next value of the sub array and puts into its proper spot in
+			// the sub array
 			for (i = j - 1; (i >= 0) && (intNumbers[i] > temp); i--) {
 				intNumbers[i + 1] = intNumbers[i];
 			}
+			// prints out array
 			for (int x = 0; x < intNumbers.length; x++) {
 				System.out.print(intNumbers[x] + "  ");
 				if (x == intNumbers.length - 1) {
 					System.out.println(" ");
 				}
 			}
+			// declares new thing to compare
 			intNumbers[i + 1] = temp;
+		}
+		for (int x = 0; x < intNumbers.length; x++) {
+			System.out.print(intNumbers[x] + "  ");
 		}
 	}
 }
