@@ -1,9 +1,7 @@
 import java.util.Scanner;
 
 /**
- * @author 323016139
- * Ajay Gurdat 
- * 07/11/2016 - 22/11/2016 Searching
+ * @author 323016139 Ajay Gurdat 07/11/2016 - 22/11/2016 Searching
  */
 public class Searches {
 

@@ -14,12 +14,13 @@ public class Sort {
 	 * 
 	 * @param words
 	 */
-	static void sortString(String[] words) {
+	public static void sortString(String[] words) {
 		System.out.println("What method would you like to sort the array?");
 		System.out.println("1. Selection");
 		System.out.println("2. Insertion");
 		System.out.println("3. Bubble");
 		System.out.println("4. Merge");
+		System.out.println("5. Quick");
 		scan = new Scanner(System.in);
 		int prefMethod = scan.nextInt();
 		if (prefMethod == 1) {
@@ -29,13 +30,114 @@ public class Sort {
 		} else if (prefMethod == 3) {
 			bubbleSort(words);
 		} else if (prefMethod == 4) {
-			mergeSort(words);
+			String[] sortedArray = mergeSort(words);
+			for (int x = 0; x < sortedArray.length; x++) {
+				System.out.print(sortedArray[x] + "  ");
+			}
+		} else if (prefMethod == 5) {
+			int start = 0;
+			int end = words.length - 1;
+			quickSort(words, start, end);
+			for (int x = 0; x < words.length; x++) {
+				System.out.print(words[x] + "  ");
+			}
 		}
 	}
 
-	private static void mergeSort(String[] words) {
-		// TODO Auto-generated method stub
+	/**
+	 * This method does quick sorting to sort the array of strings
+	 * 
+	 * @param words
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public static String[] quickSort(String[] words, int start, int end) {
+		if (start >= end)
+			return words;
+		String pivot = words[end];
+		int i = start, j = end;
+		while (i <= j) {
+			while (words[i].compareTo(pivot) < 0) {
+				i++;
+			}
 
+			while (words[j].compareTo(pivot) > 0) {
+				j--;
+			}
+
+			if (i <= j) {
+				String temp = words[i];
+				words[i] = words[j];
+				words[j] = temp;
+				i++;
+				j--;
+			}
+		}
+
+		if (start < j)
+			quickSort(words, start, j);
+
+		if (end > i)
+			quickSort(words, i, end);
+		return words;
+	}
+
+	/**
+	 * This method does merge sorting to sort the array of strings
+	 * 
+	 * @param words
+	 * @return
+	 */
+	private static String[] mergeSort(String[] words) {
+		if (words.length <= 1) {
+			return words;
+		}
+		String[] sortedArray = new String[words.length];
+		String[] leftSide = Arrays.copyOfRange(words, 0, words.length / 2);
+		String[] rightSide = Arrays.copyOfRange(words, words.length / 2, words.length);
+
+		leftSide = mergeSort(leftSide);
+		rightSide = mergeSort(rightSide);
+		sortedArray = merge(leftSide, rightSide);
+		return sortedArray;
+	}
+
+	/**
+	 * This method merges two sorted arrays into one big sorted array
+	 * 
+	 * @param leftSide
+	 * @param rightSide
+	 * @return
+	 */
+	private static String[] merge(String[] leftSide, String[] rightSide) {
+		String[] sortedArray = new String[leftSide.length + rightSide.length];
+		int indexRight = 0;
+		int indexLeft = 0;
+		int indexSorted = 0;
+
+		while (indexLeft < leftSide.length || indexRight < rightSide.length) {
+			if (indexLeft < leftSide.length && indexRight < rightSide.length) {
+				if (leftSide[indexLeft].compareTo(rightSide[indexRight]) <= 0) {
+					sortedArray[indexSorted] = leftSide[indexLeft];
+					indexLeft++;
+					indexSorted++;
+				} else {
+					sortedArray[indexSorted] = rightSide[indexRight];
+					indexRight++;
+					indexSorted++;
+				}
+			} else if (indexLeft < leftSide.length) {
+				sortedArray[indexSorted] = leftSide[indexLeft];
+				indexLeft++;
+				indexSorted++;
+			} else if (indexRight < rightSide.length) {
+				sortedArray[indexSorted] = rightSide[indexRight];
+				indexRight++;
+				indexSorted++;
+			}
+		}
+		return sortedArray;
 	}
 
 	/**
@@ -43,7 +145,7 @@ public class Sort {
 	 * 
 	 * @param words
 	 */
-	private static void bubbleSort(String[] words) {
+	public static void bubbleSort(String[] words) {
 		for (int a = 0; a < words.length - 1; a++) {
 			for (int i = 0; i < words.length - 1; i++) {
 				if (words[i].compareTo(words[i + 1]) > 0) {
@@ -64,7 +166,7 @@ public class Sort {
 	 * 
 	 * @param words
 	 */
-	private static void insertionSort(String[] words) {
+	public static void insertionSort(String[] words) {
 		int i;
 		for (int j = 1; j < words.length; j++) {
 			String temp = words[j];
@@ -86,7 +188,7 @@ public class Sort {
 	 * 
 	 * @param words
 	 */
-	private static void selectionSort(String[] words) {
+	public static void selectionSort(String[] words) {
 		for (int i = 0; i < words.length; i++) {
 			String smallestLetter = words[i];
 			int smallestIndex = i;
@@ -113,11 +215,13 @@ public class Sort {
 	 * 
 	 * @param doubleNumbers
 	 */
-	static void sortDouble(double[] doubleNumbers) {
+	public static void sortDouble(double[] doubleNumbers) {
 		System.out.println("What method would you like to sort the array?");
 		System.out.println("1. Selection");
 		System.out.println("2. Insertion");
 		System.out.println("3. Bubble");
+		System.out.println("4. Merge");
+		System.out.println("5. Quick");
 		scan = new Scanner(System.in);
 		int prefMethod = scan.nextInt();
 		if (prefMethod == 1) {
@@ -126,8 +230,103 @@ public class Sort {
 			insertionSort(doubleNumbers);
 		} else if (prefMethod == 3) {
 			bubbleSort(doubleNumbers);
+		} else if (prefMethod == 4) {
+			double[] sortedArray = mergeSort(doubleNumbers);
+			for (int x = 0; x < sortedArray.length; x++) {
+				System.out.print(sortedArray[x] + "  ");
+			}
+		} else if (prefMethod == 5) {
+			int start = 0;
+			int end = doubleNumbers.length - 1;
+			quickSort(doubleNumbers, start, end);
+			for (int x = 0; x < doubleNumbers.length; x++) {
+				System.out.print(doubleNumbers[x] + "  ");
+			}
 		}
 
+	}
+
+	public static double[] quickSort(double[] doubleNumbers, int start, int end) {
+		if (start >= end)
+			return doubleNumbers;
+		double pivot = doubleNumbers[end];
+		int i = start, j = end;
+		while (i <= j) {
+			while (doubleNumbers[i] < pivot) {
+				i++;
+			}
+
+			while (doubleNumbers[j] > pivot) {
+				j--;
+			}
+
+			if (i <= j) {
+				double temp = doubleNumbers[i];
+				doubleNumbers[i] = doubleNumbers[j];
+				doubleNumbers[j] = temp;
+				i++;
+				j--;
+			}
+		}
+
+		if (start < j)
+			quickSort(doubleNumbers, start, j);
+
+		if (end > i)
+			quickSort(doubleNumbers, i, end);
+		return doubleNumbers;
+	}
+
+	public static double[] mergeSort(double[] doubleNumbers) {
+		if (doubleNumbers.length <= 1) {
+			return doubleNumbers;
+		}
+		double[] sortedArray = new double[doubleNumbers.length];
+		double[] leftSide = Arrays.copyOfRange(doubleNumbers, 0, doubleNumbers.length / 2);
+		double[] rightSide = Arrays.copyOfRange(doubleNumbers, doubleNumbers.length / 2, doubleNumbers.length);
+
+		leftSide = mergeSort(leftSide);
+		rightSide = mergeSort(rightSide);
+		sortedArray = merge(leftSide, rightSide);
+		return sortedArray;
+	}
+
+	/**
+	 * This method merges two sorted arrays into one big sorted array
+	 * 
+	 * @param leftSide
+	 * @param rightSide
+	 * @return
+	 */
+
+	private static double[] merge(double[] leftSide, double[] rightSide) {
+		double[] sortedArray = new double[leftSide.length + rightSide.length];
+		int indexRight = 0;
+		int indexLeft = 0;
+		int indexSorted = 0;
+
+		while (indexLeft < leftSide.length || indexRight < rightSide.length) {
+			if (indexLeft < leftSide.length && indexRight < rightSide.length) {
+				if (leftSide[indexLeft] <= rightSide[indexRight]) {
+					sortedArray[indexSorted] = leftSide[indexLeft];
+					indexLeft++;
+					indexSorted++;
+				} else {
+					sortedArray[indexSorted] = rightSide[indexRight];
+					indexRight++;
+					indexSorted++;
+				}
+			} else if (indexLeft < leftSide.length) {
+				sortedArray[indexSorted] = leftSide[indexLeft];
+				indexLeft++;
+				indexSorted++;
+			} else if (indexRight < rightSide.length) {
+				sortedArray[indexSorted] = rightSide[indexRight];
+				indexRight++;
+				indexSorted++;
+			}
+		}
+		return sortedArray;
 	}
 
 	/**
@@ -135,7 +334,7 @@ public class Sort {
 	 * 
 	 * @param doubleNumbers
 	 */
-	private static void bubbleSort(double[] doubleNumbers) {
+	public static void bubbleSort(double[] doubleNumbers) {
 		for (int a = 0; a < doubleNumbers.length - 1; a++) {
 			for (int i = 0; i < doubleNumbers.length - 1; i++) {
 				if (doubleNumbers[i] > doubleNumbers[i + 1]) {
@@ -156,7 +355,7 @@ public class Sort {
 	 * 
 	 * @param doubleNumbers
 	 */
-	private static void insertionSort(double[] doubleNumbers) {
+	public static void insertionSort(double[] doubleNumbers) {
 		int i;
 		for (int j = 1; j < doubleNumbers.length; j++) {
 			double temp = doubleNumbers[j];
@@ -178,7 +377,7 @@ public class Sort {
 	 * 
 	 * @param doubleNumbers
 	 */
-	private static void selectionSort(double[] doubleNumbers) {
+	public static void selectionSort(double[] doubleNumbers) {
 		for (int i = 0; i < doubleNumbers.length; i++) {
 			double smallestValue = doubleNumbers[i];
 			int smallestIndex = i;
@@ -212,6 +411,7 @@ public class Sort {
 		System.out.println("2. Insertion");
 		System.out.println("3. Bubble");
 		System.out.println("4. Merge");
+		System.out.println("5. Quick");
 		scan = new Scanner(System.in);
 		int prefMethod = scan.nextInt();
 		if (prefMethod == 1) {
@@ -226,8 +426,46 @@ public class Sort {
 				System.out.print(sortedArray[x] + "  ");
 			}
 
+		} else if (prefMethod == 5) {
+			int start = 0;
+			int end = intNumbers.length - 1;
+			quickSort(intNumbers, start, end);
+			for (int x = 0; x < intNumbers.length; x++) {
+				System.out.print(intNumbers[x] + "  ");
+			}
 		}
 
+	}
+
+	public static int[] quickSort(int[] intNumbers, int start, int end) {
+		if (start >= end)
+			return intNumbers;
+		int pivot = intNumbers[end];
+		int i = start, j = end;
+		while (i <= j) {
+			while (intNumbers[i] < pivot) {
+				i++;
+			}
+
+			while (intNumbers[j] > pivot) {
+				j--;
+			}
+
+			if (i <= j) {
+				int temp = intNumbers[i];
+				intNumbers[i] = intNumbers[j];
+				intNumbers[j] = temp;
+				i++;
+				j--;
+			}
+		}
+
+		if (start < j)
+			quickSort(intNumbers, start, j);
+
+		if (end > i)
+			quickSort(intNumbers, i, end);
+		return intNumbers;
 	}
 
 	/**
@@ -236,16 +474,17 @@ public class Sort {
 	 * @param intNumbers
 	 * @return
 	 */
-	private static int[] mergeSort(int[] intNumbers) {
+	public static int[] mergeSort(int[] intNumbers) {
 		if (intNumbers.length <= 1) {
 			return intNumbers;
 		}
+		int[] sortedArray = new int[intNumbers.length];
 		int[] leftSide = Arrays.copyOfRange(intNumbers, 0, intNumbers.length / 2);
 		int[] rightSide = Arrays.copyOfRange(intNumbers, intNumbers.length / 2, intNumbers.length);
 
 		leftSide = mergeSort(leftSide);
 		rightSide = mergeSort(rightSide);
-		int[] sortedArray = merge(leftSide, rightSide);
+		sortedArray = merge(leftSide, rightSide);
 		return sortedArray;
 	}
 
@@ -263,7 +502,7 @@ public class Sort {
 		int indexSorted = 0;
 
 		while (indexLeft < leftSide.length || indexRight < rightSide.length) {
-			if (indexLeft < leftSide.length || indexRight < rightSide.length) {
+			if (indexLeft < leftSide.length && indexRight < rightSide.length) {
 				if (leftSide[indexLeft] <= rightSide[indexRight]) {
 					sortedArray[indexSorted] = leftSide[indexLeft];
 					indexLeft++;
@@ -291,7 +530,7 @@ public class Sort {
 	 * 
 	 * @param intNumbers
 	 */
-	private static void bubbleSort(int[] intNumbers) {
+	public static void bubbleSort(int[] intNumbers) {
 		for (int a = 0; a < intNumbers.length - 1; a++) {
 			for (int i = 0; i < intNumbers.length - 1; i++) {
 				if (intNumbers[i] > intNumbers[i + 1]) {

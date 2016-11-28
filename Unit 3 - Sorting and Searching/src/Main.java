@@ -1,9 +1,7 @@
 import java.util.Scanner;
 
 /**
- * @author 323016139
- * Ajay Gurdat
- * 010/11/2016 - 22/11/2016 Main
+ * @author 323016139 Ajay Gurdat 010/11/2016 - 22/11/2016 Main
  */
 public class Main {
 	private static Scanner scan;
