@@ -31,18 +31,10 @@ public class Searches {
 			break;
 		case 2:
 			// sorts array because binary search assumes the array is already
-			// sorted (bubble sort)
-			for (int a = 0; a < words.length - 1; a++) {
-				for (int i = 0; i < words.length - 1; i++) {
-					if (words[i].compareTo(words[i + 1]) > 0) {
-						String temp = words[i];
-						words[i] = words[i + 1];
-						words[i + 1] = temp;
-					}
-				}
-			}
+			// sorted (via merge sort)
+			String[] sortedArray = Sort.mergeSort(words);
 			// calls binary search
-			foundIndex = binarySearch(startIndex, endIndex, midIndex, target, words);
+			foundIndex = binarySearch(startIndex, endIndex, midIndex, target, sortedArray);
 			break;
 		}
 		if (foundIndex >= 0) {
@@ -77,18 +69,10 @@ public class Searches {
 			break;
 		case 2:
 			// sorts array because binary search assumes the array is already
-			// sorted (bubble sort)
-			for (int a = 0; a < doubleNumbers.length - 1; a++) {
-				for (int i = 0; i < doubleNumbers.length - 1; i++) {
-					if (doubleNumbers[i] > doubleNumbers[i + 1]) {
-						double temp = doubleNumbers[i];
-						doubleNumbers[i] = doubleNumbers[i + 1];
-						doubleNumbers[i + 1] = temp;
-					}
-				}
-			}
+			// sorted (via merge sort)
+			double[] sortedArray = Sort.mergeSort(doubleNumbers);
 			// calls binary search
-			foundIndex = binarySearch(startIndex, endIndex, midIndex, target, doubleNumbers);
+			foundIndex = binarySearch(startIndex, endIndex, midIndex, target, sortedArray);
 			break;
 		}
 		if (foundIndex >= 0) {
@@ -124,18 +108,10 @@ public class Searches {
 			break;
 		case 2:
 			// sorts array because binary search assumes the array is already
-			// sorted (bubble sort)
-			for (int a = 0; a < intNumbers.length - 1; a++) {
-				for (int i = 0; i < intNumbers.length - 1; i++) {
-					if (intNumbers[i] > intNumbers[i + 1]) {
-						int temp = intNumbers[i];
-						intNumbers[i] = intNumbers[i + 1];
-						intNumbers[i + 1] = temp;
-					}
-				}
-			}
+			// sorted (via merge sort)
+			int[] sortedArray = Sort.mergeSort(intNumbers);
 			// calls binary search
-			foundIndex = binarySearch(startIndex, endIndex, midIndex, target, intNumbers);
+			foundIndex = binarySearch(startIndex, endIndex, midIndex, target, sortedArray);
 			break;
 		}
 		if (foundIndex >= 0) {
@@ -147,12 +123,13 @@ public class Searches {
 	}
 
 	/**
+	 * This method does binary searching to find the target number in the array
+	 * 
 	 * @param startIndex
 	 * @param endIndex
 	 * @param midIndex
 	 * @param target
-	 * @return This method does binary searching to find the target number in
-	 *         the array
+	 * @return
 	 */
 	private static int binarySearch(int startIndex, int endIndex, int midIndex, int target, int[] intNumbers) {
 
@@ -183,6 +160,16 @@ public class Searches {
 
 	}
 
+	/**
+	 * This method does binary searching to find the target number in the array
+	 * 
+	 * @param startIndex
+	 * @param endIndex
+	 * @param midIndex
+	 * @param target
+	 * @param doubleNumbers
+	 * @return
+	 */
 	private static int binarySearch(int startIndex, int endIndex, int midIndex, double target, double[] doubleNumbers) {
 
 		if (startIndex > endIndex) {
@@ -213,6 +200,8 @@ public class Searches {
 	}
 
 	/**
+	 * This method does binary searching to find the target number in the array
+	 * 
 	 * @param startIndex
 	 * @param endIndex
 	 * @param midIndex
@@ -250,10 +239,11 @@ public class Searches {
 	}
 
 	/**
+	 * This method does linear searching to find the target number in the array
+	 * 
 	 * @param numbers
 	 * @param inputTarget
-	 * @return This method does linear searching to find the target number in
-	 *         the array
+	 * @return
 	 */
 	public static int linearSearch(int[] intNumbers, int target) {
 		for (int i = 0; i < intNumbers.length; i++) {
@@ -270,6 +260,8 @@ public class Searches {
 	}
 
 	/**
+	 * This method does linear searching to find the target number in the array
+	 * 
 	 * @param words
 	 * @param target
 	 * @return
@@ -288,6 +280,8 @@ public class Searches {
 	}
 
 	/**
+	 * This method does linear searching to find the target number in the array
+	 * 
 	 * @param doubleNumbers
 	 * @param target
 	 * @return
