@@ -514,14 +514,20 @@ public class Sort {
 		}
 
 	}
-
-	public static int[] quickSort(int[] intNumbers, int start, int end) {
+/**
+ * This method does quick sorting to sort the array of integers
+ * @param intNumbers
+ * @param small
+ * @param big
+ * @return
+ */
+	public static int[] quickSort(int[] intNumbers, int small, int big) {
 		// base case, returns array
-		if (start >= end)
+		if (small >= big)
 			return intNumbers;
 		// creates pivot at the end of current part of the array
-		int pivot = intNumbers[end];
-		int i = start, j = end;
+		int pivot = intNumbers[big];
+		int i = small, j = big;
 		while (i <= j) {
 			while (intNumbers[i] < pivot) {
 				i++;
@@ -540,15 +546,13 @@ public class Sort {
 			}
 		}
 
-		if (start < j)
-			// calls back method with new variables for the next part of the
-			// array
-			quickSort(intNumbers, start, j);
+		if (small < j)
+			// calls back method with new variables for the partition
+			quickSort(intNumbers, small, j);
 
-		if (end > i)
-			// calls back method with new variables for the next part of the
-			// array
-			quickSort(intNumbers, i, end);
+		if (big > i)
+			// calls back method with new variables for the partition
+			quickSort(intNumbers, i, big);
 		return intNumbers;
 	}
 
