@@ -48,7 +48,7 @@ public class Disk extends Circle {
 	 * pre: d is a Disk object 
 	 * post: true has been returned if objects have the same radii and thickness. false has been returned otherwise.
 	 */
-	public boolean equals(Object d) {
+	public boolean equals(Disk d) {
 		Disk testObj = (Disk) d;
 
 		if (testObj.getRadius() == super.getRadius() && testObj.getThickness() == thickness) {
