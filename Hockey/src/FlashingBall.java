@@ -67,6 +67,10 @@ public class FlashingBall extends MovingObject {
 				filledIn = true;
 		}
 	}
+	
+	public int getRadius(){
+		return radius;
+	}
 
 	/**
 	 * Draws the ball

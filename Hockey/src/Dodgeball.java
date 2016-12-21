@@ -10,21 +10,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
- * This is the beginning of a simple game. You should expand it into a dodgeball
- * game, where the user controls an object with the mouse or keyboard, and tries
- * to avoid the balls flying around the screen. If they get hit, it's game over.
- * If they survive for 20 seconds (or some other fixed time), they go on to the
- * next level. <br>
- * <br>
  * Should be run at around 500x300 pixels.<br>
  * <br>
  * 
- * @version Nov. 2015
+ * @version Dec. 2016
  * 
- * @author Christina Kemp adapted from Sam Scott
+ * @author Ajay Gurdat adapted from Christina Kemp adapted from Sam Scott
  */
 @SuppressWarnings("serial")
-public class GamePanel extends JPanel implements Runnable, MouseMotionListener {
+public class Dodgeball extends JPanel implements Runnable, MouseMotionListener {
 
 	int x = -1, y = -1;
 	int width = 500;
@@ -33,7 +27,7 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener {
 	/**
 	 * The number of balls on the screen.
 	 */
-	final int numBalls = 1;
+	final int numBalls = 50;
 	/**
 	 * The pause between repainting (should be set for about 30 frames per
 	 * second).
@@ -42,6 +36,9 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener {
 	/**
 	 * An array of balls.
 	 */
+
+	boolean filled = false;
+
 	FlashingBall[] ball = new FlashingBall[numBalls];
 
 	/** main program (entry point) */
@@ -54,12 +51,16 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener {
 		frame.setAutoRequestFocus(false);
 		frame.setVisible(true);
 		Container c = frame.getContentPane();
-		c.add(new GamePanel());
+		c.add(new Dodgeball());
 		frame.pack();
 
 	}
 
-	public GamePanel() {
+	public void init() {
+		addMouseMotionListener(this);
+	}
+
+	public Dodgeball() {
 		// Start the ball bouncing (in its own thread)
 		this.setPreferredSize(new Dimension(width, height));
 		this.setBackground(Color.WHITE);
@@ -74,7 +75,6 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener {
 
 		Thread gameThread = new Thread(this);
 		gameThread.start();
-
 	}
 
 	/**
@@ -103,29 +103,34 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener {
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		filled = true;
 		x = e.getX();
 		y = e.getY();
+		repaint();
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
+		filled = false;
 		x = e.getX();
 		y = e.getY();
+		repaint();
 	}
 
-	public boolean hitBoxCheck(MouseEvent e){
-		for(int i = 0; i < numBalls; i++) {
+	public boolean hitBoxCheck(MouseEvent e) {
+		for (int i = 0; i < numBalls; i++) {
 			double ballPositionX = ball[i].getX();
 			double mousePositionX = e.getX();
 			double ballPositionY = ball[i].getY();
 			double mousePositionY = e.getY();
 			double xLine = ballPositionX - mousePositionX;
 			double yLine = ballPositionY - mousePositionY;
-			double hypotenuse = Math.sqrt(Math.pow(xLine, 2) + Math.pow(yLine, 2));
-			if (hypotenuse >= 10){
+			double distance = Math.sqrt(Math.pow(xLine, 2) + Math.pow(yLine, 2));
+			if (distance <= ball[i].getRadius()) {
 				return true;
 			}
 		}
+		return false;
 	}
 
 }
