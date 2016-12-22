@@ -127,6 +127,7 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener {
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		System.out.println("You dragged the mouse.");
 		boolean space = hitBoxCheck(e);
 		if (space == true) {
 			run();
@@ -135,6 +136,7 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener {
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
+		System.out.println("You moved the mouse.");
 		boolean space = hitBoxCheck(e);
 		if (space == true) {
 			run();
