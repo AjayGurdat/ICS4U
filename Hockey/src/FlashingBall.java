@@ -100,4 +100,3 @@ public class FlashingBall extends MovingObject {
 		return filledIn;
 	}
 }
-
