@@ -66,7 +66,7 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener {
 	public GamePanel() {
 		// Start the ball bouncing (in its own thread)
 		this.setPreferredSize(new Dimension(width, height));
-		this.setBackground(Color.WHITE);
+		this.setBackground(Color.BLACK);
 
 		for (int i = 0; i < numBalls; i++) {
 			ball[i] = new FlashingBall(50, 50, 0, width, 0, height);
@@ -78,19 +78,18 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener {
 
 		Thread gameThread = new Thread(this);
 		gameThread.start();
+		addMouseMotionListener(this);
 	}
 
 	/**
 	 * Repaints the frame periodically.
 	 */
 	public void run() {
-		while (true) {
 			repaint();
 			try {
 				Thread.sleep(pauseDuration);
 			} catch (InterruptedException e) {
 			}
-		}
 	}
 
 	/**
@@ -111,10 +110,6 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener {
 			double mousePositionX = e.getX();
 			double ballPositionY = ball[i].getY();
 			double mousePositionY = e.getY();
-			System.out.println(ballPositionX);
-			System.out.println(mousePositionX);
-			System.out.println(ballPositionY);
-			System.out.println(mousePositionY);
 			double xLine = ballPositionX - mousePositionX;
 			double yLine = ballPositionY - mousePositionY;
 			double distance = Math.sqrt(Math.pow(xLine, 2) + Math.pow(yLine, 2));
@@ -127,22 +122,19 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener {
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		System.out.println("You dragged the mouse.");
 		boolean space = hitBoxCheck(e);
 		if (space == true) {
+			System.out.println("Dragged");
 			run();
 		}
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		System.out.println("You moved the mouse.");
 		boolean space = hitBoxCheck(e);
 		if (space == true) {
+			System.out.println("Moved");
 			run();
 		}
 	}
-
-
-	
 }
