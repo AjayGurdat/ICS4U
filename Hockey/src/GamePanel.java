@@ -28,19 +28,23 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements Runnable, MouseMotionListener, MouseListener {
 
-	int level = 1;
-	int nextLevelTime = 20;
+	int levelRadius = 10;
+	int level = 0;
+	int distanceBetweenLevels = 20;
+	int nextLevelTime = 1;
 	int time = 0;
+	
+	
 	boolean alive;
 	boolean dieByBall = false;
 	int x = -1, y = -1;
 	static int width = 1280;
-	static int height = 400;
+	static int height = 700;
 
 	/**
 	 * The number of balls on the screen.
 	 */
-	int numBalls = 50;
+	int numBalls = 20;
 	/**
 	 * The pause between repainting (should be set for about 30 frames per
 	 * second).
@@ -155,8 +159,17 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener, 
 			time++;
 			if (time == nextLevelTime) {
 				level++;
-				nextLevelTime = nextLevelTime + 20;
-				System.out.println("NEXT LEVEL - LEVEL " + level + "!");
+				nextLevelTime = nextLevelTime + distanceBetweenLevels;
+				levelRadius++;
+				for (int i = 0; i < numBalls; i++){
+					ball[i].setRadius(levelRadius);
+					ball[i].setRadius(levelRadius);
+				}
+				if (level == 1) {
+					System.out.println("LEVEL 1! Good Luck!");
+				} else {
+					System.out.println("NEXT LEVEL - LEVEL " + level + "!");
+				}
 			}
 
 		} else {
