@@ -4,8 +4,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,22 +19,28 @@ import javax.swing.JPanel;
  * <br>
  * Should be run at around 500x300 pixels.<br>
  * <br>
+ * 
  * @version Nov. 2015
  * 
  * @author Christina Kemp adapted from Sam Scott
  */
 
 @SuppressWarnings("serial")
-public class GamePanel extends JPanel implements Runnable, MouseMotionListener {
+public class GamePanel extends JPanel implements Runnable, MouseMotionListener, MouseListener {
 
+	int level = 1;
+	int nextLevelTime = 20;
+	int time = 0;
+	boolean alive;
+	boolean dieByBall = false;
 	int x = -1, y = -1;
-	int width = 500;
-	int height = 300;
+	static int width = 1280;
+	static int height = 400;
 
 	/**
 	 * The number of balls on the screen.
 	 */
-	final int numBalls = 5;
+	int numBalls = 50;
 	/**
 	 * The pause between repainting (should be set for about 30 frames per
 	 * second).
@@ -50,11 +56,10 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener {
 
 	/** main program (entry point) */
 	public static void main(String[] args) {
-
 		// Set up main window (using Swing's Jframe)
 		JFrame frame = new JFrame("Dodgeball");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(new Dimension(500, 300));
+		frame.setSize(new Dimension(width, height));
 		frame.setAutoRequestFocus(false);
 		frame.setVisible(true);
 		Container c = frame.getContentPane();
@@ -66,7 +71,7 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener {
 	public GamePanel() {
 		// Start the ball bouncing (in its own thread)
 		this.setPreferredSize(new Dimension(width, height));
-		this.setBackground(Color.BLACK);
+		this.setBackground(Color.WHITE);
 
 		for (int i = 0; i < numBalls; i++) {
 			ball[i] = new FlashingBall(50, 50, 0, width, 0, height);
@@ -79,17 +84,18 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener {
 		Thread gameThread = new Thread(this);
 		gameThread.start();
 		addMouseMotionListener(this);
+		addMouseListener(this);
 	}
 
 	/**
 	 * Repaints the frame periodically.
 	 */
 	public void run() {
-			repaint();
-			try {
-				Thread.sleep(pauseDuration);
-			} catch (InterruptedException e) {
-			}
+		repaint();
+		try {
+			Thread.sleep(pauseDuration);
+		} catch (InterruptedException e) {
+		}
 	}
 
 	/**
@@ -103,7 +109,6 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener {
 
 	}
 
-	
 	public boolean hitBoxCheck(MouseEvent e) {
 		for (int i = 0; i < numBalls; i++) {
 			double ballPositionX = ball[i].getX();
@@ -124,8 +129,11 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener {
 	public void mouseDragged(MouseEvent e) {
 		boolean space = hitBoxCheck(e);
 		if (space == true) {
-			System.out.println("Dragged");
-			run();
+			doRun();
+		} else if (space == false) {
+			alive = false;
+			dieByBall = true;
+			System.out.println("You got hit!");
 		}
 	}
 
@@ -133,8 +141,55 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener {
 	public void mouseMoved(MouseEvent e) {
 		boolean space = hitBoxCheck(e);
 		if (space == true) {
-			System.out.println("Moved");
-			run();
+			doRun();
+		} else if (space == false) {
+			alive = false;
+			dieByBall = true;
+			System.out.println("You got hit!");
 		}
+	}
+
+	public void doRun() {
+		if (alive == true) {
+			run();
+			time++;
+			if (time == nextLevelTime) {
+				level++;
+				nextLevelTime = nextLevelTime + 20;
+				System.out.println("NEXT LEVEL - LEVEL " + level + "!");
+			}
+
+		} else {
+			System.out.println("You are dead!");
+		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		if (dieByBall == false) {
+			alive = true;
+		}
+		System.out.println("Entered");
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		alive = false;
+		System.out.println("Exited");
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
 	}
 }
