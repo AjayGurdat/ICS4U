@@ -33,8 +33,7 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener, 
 	int distanceBetweenLevels = 20;
 	int nextLevelTime = 1;
 	int time = 0;
-	
-	
+
 	boolean alive;
 	boolean dieByBall = false;
 	int x = -1, y = -1;
@@ -110,6 +109,13 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener, 
 		for (int i = 0; i < numBalls; i++) {
 			ball[i].draw(g);
 		}
+		if (alive != false) {
+			g.setColor(new Color(0, 0, 0));
+		} else {
+			g.setColor(new Color(255, 255, 255));
+		}
+		g.drawString("Level: " + level, 10, 20);
+		g.drawString("Points/Time: " + time, 10, 40);
 
 	}
 
@@ -138,6 +144,10 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener, 
 			alive = false;
 			dieByBall = true;
 			System.out.println("You got hit!");
+			this.setBackground(Color.RED);
+			for (int i = 0; i < numBalls; i++) {
+				ball[i].setColor(new Color(0, 0, 0));
+			}
 		}
 	}
 
@@ -150,6 +160,10 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener, 
 			alive = false;
 			dieByBall = true;
 			System.out.println("You got hit!");
+			this.setBackground(Color.RED);
+			for (int i = 0; i < numBalls; i++) {
+				ball[i].setColor(new Color(0, 0, 0));
+			}
 		}
 	}
 
@@ -161,7 +175,7 @@ public class GamePanel extends JPanel implements Runnable, MouseMotionListener, 
 				level++;
 				nextLevelTime = nextLevelTime + distanceBetweenLevels;
 				levelRadius++;
-				for (int i = 0; i < numBalls; i++){
+				for (int i = 0; i < numBalls; i++) {
 					ball[i].setRadius(levelRadius);
 					ball[i].setRadius(levelRadius);
 				}
