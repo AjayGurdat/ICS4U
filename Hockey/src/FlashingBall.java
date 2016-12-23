@@ -27,6 +27,7 @@ public class FlashingBall extends MovingObject {
 	 * outline.
 	 */
 	private boolean filledIn;
+	
 
 	/**
 	 * Calls the superclass constructor, plus sets radius, and flash parameters.
@@ -72,6 +73,10 @@ public class FlashingBall extends MovingObject {
 		return radius;
 	}
 
+	public void setRadius(int radius){
+		this.radius = radius;
+	}
+
 	/**
 	 * Draws the ball
 	 * 
@@ -99,4 +104,5 @@ public class FlashingBall extends MovingObject {
 	public boolean isFilled(){
 		return filledIn;
 	}
+	
 }
